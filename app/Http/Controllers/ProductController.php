@@ -26,7 +26,6 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request);
         $data = $request->validate([
             'name' => 'required',
             'price' => 'required',
@@ -36,11 +35,12 @@ class ProductController extends Controller
         $product = new Product();
         $product->name = $request->input('name');
         $product->price = $request->input('price');
+        
         // Retrieve the corresponding warehouse by ID
         $warehouse = Warehouse::find($request->input('warehouse_id'));
-
         // Associate the warehouse with the product
         $product->warehouse()->associate($warehouse);
+
         $product->save();
 
         // Redirect to a relevant page or return a response

@@ -32,15 +32,15 @@ class WarehouseController extends Controller
             'supplier_id' => 'required'
         ]);
 
-        // Warehouse::create($data);
         $warehouse = new Warehouse();
         $warehouse->name = $request->input('name');
         $warehouse->address = $request->input('address');
+
         // Retrieve the corresponding supplier by ID
         $supplier = Supplier::find($request->input('supplier_id'));
-
         // Associate the supplier with the warehouse
         $warehouse->supplier()->associate($supplier);
+
         $warehouse->save();
 
         // Redirect to a relevant page or return a response
